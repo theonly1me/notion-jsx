@@ -219,7 +219,7 @@ class TemplateEngine {
       <ul
         key={key}
         style={(!_.isEmpty(styles) && { ...styles }) || {}}
-        className="list-disc text-md py-1/2 md:text-justify leading-8 text-neutral-700 max-w-4xl"
+        className="list-disc text-md py-1/2 md:text-justify leading-8 text-neutral-700 max-w-4xl pl-4"
       >
         <li className="list-item">
           {this.renderRichText(block.bulleted_list_item.rich_text)}
