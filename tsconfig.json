@@ -21,7 +21,7 @@
       "@/*": [
         "./src/*"
       ],
-      "notion-to-jsx": [
+      "notion-jsx": [
         "./dist/types/index.d.ts"
       ]
     },

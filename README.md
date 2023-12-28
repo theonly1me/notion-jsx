@@ -5,7 +5,7 @@ A super fast plugin that converts your notion page to corresponding JSX with cus
 ## Installation
 
 ```bash
-npm install notion-to-jsx
+npm install notion-jsx
 ```
 
 ## Usage
@@ -41,16 +41,16 @@ const getBlocks = () => {
 };
 ```
 
-### Using notionToJSX to parse the blocks to JSX
+### Using notionJSX to parse the blocks to JSX
 
-You can pass blocks directly to the `generateJSX()` function on `notionToJSX`.
+You can pass blocks directly to the `generateJSX()` function on `notionJSX`.
 
 ```typescript
-import notionToJSX from 'notion-to-jsx';
+import notionJSX from 'notion-jsx';
 
 const MyComponent = () => {
   const blocks = getBlocks();
-  const elements = notionToJSX.generateJSX(blocks) as ReactElement[];
+  const elements = notionJSX.generateJSX(blocks) as ReactElement[];
 
   return (
     <div className="my-class">
@@ -106,7 +106,7 @@ const options = {
     heading_2: { textDecoration: 'underline' },
   },
 };
-const elements = notionToJSX.generateJSX(blocks, options) as ReactElement[];
+const elements = notionJSX.generateJSX(blocks, options) as ReactElement[];
 ```
 
 ### Rendering generated JSX on the DOM
@@ -131,7 +131,7 @@ To generate JSX, you can use the generateJSX function and pass the blocks and op
 
 ## Contributing
 
-NotionToJSX is completely free and open source, please feel free to contribute if you like what we are doing.
+NotionJSX is completely free and open source, please feel free to contribute if you like what we are doing.
 
 ### How to contribute?
 
@@ -144,7 +144,7 @@ Click on the "Fork" button at the top right corner of this repository. This will
 Clone the forked repository to your local machine using the git clone command.
 
 ```bash
-git clone https://github.com/your-username/notion-to-jsx.git
+git clone https://github.com/your-username/notion-jsx.git
 ```
 
 #### 3. Create a Branch:
@@ -183,4 +183,4 @@ Open a pull request from your forked repository to the main repository.
 
 If you encounter issues or have ideas for new features, feel free to open an issue on the issue tracker.
 
-Thank you for making NotionToJSX even better! ❤️
+Thank you for making NotionJSX even better! ❤️

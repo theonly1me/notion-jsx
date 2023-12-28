@@ -1,5 +1,5 @@
 {
-  "name": "notion-to-jsx",
+  "name": "notion-jsx",
   "version": "1.0.0",
   "description": "A super fast plugin to convert your notion page to corresponding JSX, with customizable styles",
   "main": "dist/bundle.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/theonly1me/notion-to-jsx.git"
+    "url": "git+ssh://git@github.com/theonly1me/notion-jsx.git"
   },
   "keywords": [
     "React",
@@ -27,9 +27,9 @@
   "author": "Atchyut Preetham Pulavarthi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/theonly1me/notion-to-jsx/issues"
+    "url": "https://github.com/theonly1me/notion-jsx/issues"
   },
-  "homepage": "https://github.com/theonly1me/notion-to-jsx#readme",
+  "homepage": "https://github.com/theonly1me/notion-jsx#readme",
   "devDependencies": {
     "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.6",

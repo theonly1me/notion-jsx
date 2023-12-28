@@ -15,7 +15,7 @@ export type TemplateOptions = {
   };
 };
 
-export type NotionToJSX = {
+export type NotionJSX = {
   generateJSX(
     blocks: BlockObjectResponse[],
     options?: TemplateOptions
