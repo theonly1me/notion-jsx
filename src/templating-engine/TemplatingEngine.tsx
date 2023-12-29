@@ -274,7 +274,8 @@ class TemplateEngine {
     };
 
     // TODO:
-    // 1. add easy styles customization for various parts of the codeblock, currently styles can only be added to parent div
+    // 1. add easy styles customization for various parts of the codeblock,
+    // currently styles can only be added to parent div
 
     const hljs = (await import(/* webpackChunkName: "hljs" */ 'highlight.js'))
       .default;
@@ -366,7 +367,6 @@ class TemplateEngine {
         className="flex items-center justify-center my-2"
         style={(styles && { ...styles }) || {}}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={block.image.external.url}
           alt={alt}
