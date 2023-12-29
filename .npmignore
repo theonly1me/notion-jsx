@@ -6,7 +6,6 @@ webpack.config.js
 .eslintrc
 .prettierrc
 index.ts
-package.json
 postcss.config.js
 tsconfig.json
 tailwind.config.ts
