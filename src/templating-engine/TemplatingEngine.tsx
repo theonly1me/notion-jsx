@@ -15,6 +15,8 @@ import {
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
 import { LuClipboardCopy } from 'react-icons/lu';
 import { TemplateOptions } from '../../types';
+import _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
 class TemplateEngine {
   generateJSX(
@@ -26,7 +28,7 @@ class TemplateEngine {
     }
 
     return blocks.map(block => {
-      const key = Date.now().toString();
+      const key = uuidv4();
 
       switch (block.type) {
         case 'heading_1':
@@ -152,7 +154,7 @@ class TemplateEngine {
     return (
       <h1
         key={key}
-        style={(styles && { ...styles }) || {}}
+        style={(!_.isEmpty(styles) && { ...styles }) || {}}
         className="text-3xl md:text-4xl text-neutral-900 font-bold py-2"
       >
         {this.renderRichText(block.heading_1.rich_text)}
@@ -168,7 +170,7 @@ class TemplateEngine {
     return (
       <h2
         key={key}
-        style={(styles && { ...styles }) || {}}
+        style={(!_.isEmpty(styles) && { ...styles }) || {}}
         className="text-2xl md:text-3xl text-neutral-900 font-bold py-2"
       >
         {this.renderRichText(block.heading_2.rich_text)}
@@ -184,7 +186,7 @@ class TemplateEngine {
     return (
       <h3
         key={key}
-        style={(styles && { ...styles }) || {}}
+        style={(!_.isEmpty(styles) && { ...styles }) || {}}
         className="text-xl md:text-2xl py-2 font-bold text-neutral-800 max-w-3xl"
       >
         {this.renderRichText(block.heading_3.rich_text)}
@@ -200,7 +202,7 @@ class TemplateEngine {
     return (
       <p
         key={key}
-        style={(styles && { ...styles }) || {}}
+        style={(!_.isEmpty(styles) && { ...styles }) || {}}
         className="text-md max-w-l py-3 md:text-justify leading-8 text-neutral-700 md:max-w-4xl"
       >
         {this.renderRichText(block.paragraph.rich_text)}
@@ -216,7 +218,7 @@ class TemplateEngine {
     return (
       <ul
         key={key}
-        style={(styles && { ...styles }) || {}}
+        style={(!_.isEmpty(styles) && { ...styles }) || {}}
         className="list-disc text-md py-1/2 md:text-justify leading-8 text-neutral-700 max-w-4xl pl-4"
       >
         <li className="list-item">
@@ -234,7 +236,7 @@ class TemplateEngine {
     return (
       <blockquote
         key={key}
-        style={(styles && { ...styles }) || {}}
+        style={(!_.isEmpty(styles) && { ...styles }) || {}}
         className="border-l-4 py-3 px-2 my-4 border-neutral-400 md:text-justify leading-8 text-neutral-500 max-w-4xl"
       >
         {this.renderRichText(block.quote.rich_text)}
@@ -250,7 +252,7 @@ class TemplateEngine {
     return (
       <div
         key={key}
-        style={(styles && { ...styles }) || {}}
+        style={(!_.isEmpty(styles) && { ...styles }) || {}}
         className="flex flex-row gap-2 items-center text-neutral-700 my-2"
       >
         {block.to_do.checked ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
@@ -275,7 +277,7 @@ class TemplateEngine {
     return (
       <div
         className=" max-w-xs md:max-w-full bg-neutral-50 px-1 md:px-4 rounded-md"
-        style={(styles && { ...styles }) || {}}
+        style={(!_.isEmpty(styles) && { ...styles }) || {}}
       >
         <div className="flex flex-col items-start px-1 py-1 md:px-4 md:py-4 rounded-t-lg">
           <div className="flex flex-row items-center w-full justify-between">
@@ -318,7 +320,7 @@ class TemplateEngine {
     return (
       <hr
         key={key}
-        style={(styles && { ...styles }) || {}}
+        style={(!_.isEmpty(styles) && { ...styles }) || {}}
         className="max-w-96 border-t border-neutral-200"
       />
     );
@@ -350,7 +352,7 @@ class TemplateEngine {
       <div
         key={key}
         className="flex items-center justify-center my-2"
-        style={(styles && { ...styles }) || {}}
+        style={(!_.isEmpty(styles) && { ...styles }) || {}}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
