@@ -1,6 +1,6 @@
 {
   "name": "notion-jsx",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "A super fast plugin to convert your notion page to corresponding JSX, with customizable styles",
   "main": "dist/bundle.js",
   "types": "dist/types/index.d.ts",
