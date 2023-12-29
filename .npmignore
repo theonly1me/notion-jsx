@@ -1,3 +1,12 @@
 /src
 .babelrc
 webpack.config.js
+/assets
+/types
+.eslintrc
+.prettierrc
+index.ts
+package.json
+postcss.config.js
+tsconfig.json
+tailwind.config.ts
