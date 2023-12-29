@@ -17,6 +17,7 @@ import { LuClipboardCopy } from 'react-icons/lu';
 import { TemplateOptions } from '../../types';
 import _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
+import hljs from 'highlight.js';
 
 class TemplateEngine {
   generateJSX(
@@ -271,8 +272,14 @@ class TemplateEngine {
     };
 
     // TODO:
-    // 1. add syntax highlighting for code blocks
-    // 2. add easy styles customization for various parts of the codeblock, currently styles can only be added to parent div
+    // 1. add easy styles customization for various parts of the codeblock, currently styles can only be added to parent div
+
+    block.code.rich_text = block.code.rich_text.map(rich_text => {
+      return {
+        ...rich_text,
+        plain_text: hljs.highlightAuto(rich_text.plain_text).value,
+      };
+    });
 
     return (
       <div
