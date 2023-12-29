@@ -56,9 +56,7 @@
   },
   "dependencies": {
     "@notionhq/client": "^2.2.14",
-    "highlight.js": "^11.9.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-icons": "^4.12.0"
   }
 }

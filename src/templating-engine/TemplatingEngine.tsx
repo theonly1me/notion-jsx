@@ -17,7 +17,7 @@ import { LuClipboardCopy } from 'react-icons/lu';
 import { TemplateOptions } from '../../types';
 
 class TemplateEngine {
-  async generateJSX(
+  generateJSX(
     blocks: BlockObjectResponse[],
     options: TemplateOptions = { styles: {} }
   ) {
@@ -25,94 +25,89 @@ class TemplateEngine {
       return <React.Fragment></React.Fragment>;
     }
 
-    const convertedBlocks = await Promise.all(
-      blocks.map(async block => {
-        const key = `${Date.now()}`;
+    return blocks.map(block => {
+      const key = Date.now().toString();
 
-        switch (block.type) {
-          case 'heading_1':
-            return this.generateH1(
-              block,
-              key,
-              options.styles.heading_1 as CSSProperties
-            );
-          case 'heading_2':
-            return this.generateH2(
-              block,
-              key,
-              options.styles.heading_2 as CSSProperties
-            );
-          case 'heading_3':
-            return this.generateH3(
-              block,
-              key,
-              options.styles.heading_3 as CSSProperties
-            );
-          case 'paragraph':
-            return this.generateParagraph(
-              block,
-              key,
-              options.styles.paragraph as CSSProperties
-            );
-          case 'bulleted_list_item':
-            return this.generateBulletedListItem(
-              block,
-              key,
-              options.styles.bulleted_list_item as CSSProperties
-            );
-          case 'numbered_list_item':
-            // TODO: Need to fix a bug here, currently it always prints 1. as the number
-            return <span></span>;
-          // return (
-          //   <ol
-          //     key={index}
-          //     className="list-decimal text-md py-1/2 md:text-justify leading-8 text-neutral-700 max-w-4xl"
-          //   >
-          //     <li className="list-item">
-          //       {this.renderRichText(block.numbered_list_item.rich_text)}
-          //     </li>
-          //   </ol>
-          // );
-          case 'quote':
-            return this.generateQuote(
-              block,
-              key,
-              options.styles.quote as CSSProperties
-            );
-          case 'to_do':
-            return this.generateTodo(
-              block,
-              key,
-              options.styles.to_do as CSSProperties
-            );
-          case 'code':
-            const codeJSX = await this.generateCode(
-              block,
-              key,
-              options.styles.code as CSSProperties
-            );
-            return codeJSX;
-          case 'divider':
-            return this.generateDivider(
-              block,
-              key,
-              options.styles.divider as CSSProperties
-            );
-          case 'image':
-            return this.generateImage(
-              block,
-              key,
-              options.styles.image as CSSProperties
-            );
-          default:
-            // TODO: add support for other types
-            // NOTE:  return span instead of React Fragment in case user spreads the classNames prop
-            return <span></span>;
-        }
-      })
-    );
-
-    return convertedBlocks;
+      switch (block.type) {
+        case 'heading_1':
+          return this.generateH1(
+            block,
+            key,
+            options.styles.heading_1 as CSSProperties
+          );
+        case 'heading_2':
+          return this.generateH2(
+            block,
+            key,
+            options.styles.heading_2 as CSSProperties
+          );
+        case 'heading_3':
+          return this.generateH3(
+            block,
+            key,
+            options.styles.heading_3 as CSSProperties
+          );
+        case 'paragraph':
+          return this.generateParagraph(
+            block,
+            key,
+            options.styles.paragraph as CSSProperties
+          );
+        case 'bulleted_list_item':
+          return this.generateBulletedListItem(
+            block,
+            key,
+            options.styles.bulleted_list_item as CSSProperties
+          );
+        case 'numbered_list_item':
+          // TODO: Need to fix a bug here, currently it always prints 1. as the number
+          return <span></span>;
+        // return (
+        //   <ol
+        //     key={index}
+        //     className="list-decimal text-md py-1/2 md:text-justify leading-8 text-neutral-700 max-w-4xl"
+        //   >
+        //     <li className="list-item">
+        //       {this.renderRichText(block.numbered_list_item.rich_text)}
+        //     </li>
+        //   </ol>
+        // );
+        case 'quote':
+          return this.generateQuote(
+            block,
+            key,
+            options.styles.quote as CSSProperties
+          );
+        case 'to_do':
+          return this.generateTodo(
+            block,
+            key,
+            options.styles.to_do as CSSProperties
+          );
+        case 'code':
+          return this.generateCode(
+            block,
+            key,
+            options.styles.code as CSSProperties
+          );
+        case 'divider':
+          return this.generateDivider(
+            block,
+            key,
+            options.styles.divider as CSSProperties
+          );
+        case 'image':
+          return this.generateImage(
+            block,
+            key,
+            options.styles.image as CSSProperties
+          );
+        default:
+          // TODO: add support for other types
+          // NOTE:  return span instead of React Fragment in case user spreads the classNames prop
+          return <span></span>;
+      }
+    });
   }
 
   private renderRichText(richText: any[]) {
@@ -264,7 +259,7 @@ class TemplateEngine {
     );
   }
 
-  private async generateCode(
+  private generateCode(
     block: CodeBlockObjectResponse,
     key: string,
     styles: CSSProperties
@@ -274,18 +269,8 @@ class TemplateEngine {
     };
 
     // TODO:
-    // 1. add easy styles customization for various parts of the codeblock,
-    // currently styles can only be added to parent div
-
-    const hljs = (await import(/* webpackChunkName: "hljs" */ 'highlight.js'))
-      .default;
-
-    block.code.rich_text = block.code.rich_text.map(rich_text => {
-      return {
-        ...rich_text,
-        plain_text: hljs.highlightAuto(rich_text.plain_text).value,
-      };
-    });
+    // 1. add syntax highlighting for code blocks
+    // 2. add easy styles customization for various parts of the codeblock, currently styles can only be added to parent div
 
     return (
       <div
@@ -367,6 +352,7 @@ class TemplateEngine {
         className="flex items-center justify-center my-2"
         style={(styles && { ...styles }) || {}}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={block.image.external.url}
           alt={alt}
