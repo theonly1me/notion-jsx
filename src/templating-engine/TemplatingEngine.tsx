@@ -17,6 +17,7 @@ import { LuClipboardCopy } from 'react-icons/lu';
 import { TemplateOptions } from '../../types';
 import _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
+import CodeBlock from '../components/CodeBlock';
 
 class TemplateEngine {
   generateJSX(
@@ -276,16 +277,16 @@ class TemplateEngine {
 
     return (
       <div
-        className=" max-w-xs md:max-w-full bg-neutral-50 px-1 md:px-4 rounded-md"
+        className="max-w-xs md:max-w-full px-1 md:px-4 rounded-md"
         style={(!_.isEmpty(styles) && { ...styles }) || {}}
       >
         <div className="flex flex-col items-start px-1 py-1 md:px-4 md:py-4 rounded-t-lg">
-          <div className="flex flex-row items-center w-full justify-between">
-            <div className="text-xs font-semibold text-gray-400">
+          <div className="flex flex-row items-center w-full justify-between align-middle px-2">
+            <div className="text-xs font-semibold text-neutral-500 border-2 border-neutral-200 rounded-2xl px-2">
               {block.code.language}
             </div>
             <button
-              className="text-xs font-semibold text-neutral-500 btn-copy hover:text-purple-400 active:text-purple-500"
+              className="text-xs font-semibold text-neutral-500 btn-copy hover:text-neutral-600 active:text-neutral-800"
               onClick={() => {
                 copyCodeToClipboard(
                   block.code.rich_text.reduce(
@@ -300,13 +301,12 @@ class TemplateEngine {
               </span>
             </button>
           </div>
-          <div className="overflow-x-auto max-w-full">
-            <pre key={key} className="text-sm text-neutral-700">
-              <code className="block">
-                {this.renderRichText(block.code.rich_text)}
-              </code>
-            </pre>
-          </div>
+          <CodeBlock elementKey={key} language={block.code.language}>
+            {block.code.rich_text.reduce(
+              (acc, cur) => acc + ' ' + cur.plain_text,
+              ''
+            )}
+          </CodeBlock>
         </div>
       </div>
     );

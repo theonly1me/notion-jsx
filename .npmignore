@@ -9,3 +9,5 @@ index.ts
 postcss.config.js
 tsconfig.json
 tailwind.config.ts
+/.yarn
+.yarn
